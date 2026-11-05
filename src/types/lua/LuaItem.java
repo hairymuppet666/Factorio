@@ -1,4 +1,4 @@
-package types;
+package types.lua;
 
 public class LuaItem {
 

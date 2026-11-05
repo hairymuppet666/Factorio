@@ -1,4 +1,4 @@
-package types;
+package types.lua;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,8 +16,11 @@ public class LuaEntity {
     private double extensionSpeed;
     private double rotationSpeed;
 
-    private double beaconSupplyAreaDistance;
+    private double supplyAreaDistance;
+
     private double beaconDistributionEffectivity;
+
+    private double electricityWireDistance;
 
     public String getName() {
         return name;
@@ -84,12 +87,12 @@ public class LuaEntity {
         this.rotationSpeed = rotationSpeed;
     }
 
-    public double getBeaconSupplyAreaDistance() {
-        return beaconSupplyAreaDistance;
+    public double getSupplyAreaDistance() {
+        return supplyAreaDistance;
     }
 
-    public void setBeaconSupplyAreaDistance(double beaconSupplyAreaDistance) {
-        this.beaconSupplyAreaDistance = beaconSupplyAreaDistance;
+    public void setSupplyAreaDistance(double supplyAreaDistance) {
+        this.supplyAreaDistance = supplyAreaDistance;
     }
 
     public double getBeaconDistributionEffectivity() {
@@ -99,4 +102,13 @@ public class LuaEntity {
     public void setBeaconDistributionEffectivity(double beaconDistributionEffectivity) {
         this.beaconDistributionEffectivity = beaconDistributionEffectivity;
     }
+
+    public double getElectricityWireDistance() {
+        return electricityWireDistance;
+    }
+
+    public void setElectricityWireDistance(double electricityWireDistance) {
+        this.electricityWireDistance = electricityWireDistance;
+    }
+
 }

@@ -1,0 +1,84 @@
+{
+  "blueprint": {
+    "icons": [
+      {
+        "signal": {
+          "name": "assembling-machine-3"
+        },
+        "index": 1
+      }
+    ],
+    "entities": [
+      {
+        "entity_number": 1,
+        "name": "substation",
+        "position": {
+          "x": 725,
+          "y": -60
+        }
+      },
+      {
+        "entity_number": 2,
+        "name": "passive-provider-chest",
+        "position": {
+          "x": 723.5,
+          "y": -56.5
+        }
+      },
+      {
+        "entity_number": 3,
+        "name": "fast-inserter",
+        "position": {
+          "x": 722.5,
+          "y": -56.5
+        },
+        "direction": 12
+      },
+      {
+        "entity_number": 4,
+        "name": "assembling-machine-3",
+        "position": {
+          "x": 720.5,
+          "y": -55.5
+        },
+        "recipe": "iron-gear-wheel",
+        "recipe_quality": "normal"
+      },
+      {
+        "entity_number": 5,
+        "name": "requester-chest",
+        "position": {
+          "x": 723.5,
+          "y": -54.5
+        },
+        "request_filters": {
+          "sections": [
+            {
+              "index": 1,
+              "filters": [
+                {
+                  "index": 1,
+                  "name": "iron-plate",
+                  "quality": "normal",
+                  "comparator": "=",
+                  "count": 300
+                }
+              ]
+            }
+          ]
+        }
+      },
+      {
+        "entity_number": 6,
+        "name": "bulk-inserter",
+        "position": {
+          "x": 722.5,
+          "y": -54.5
+        },
+        "direction": 4
+      }
+    ],
+    "item": "blueprint",
+    "version": 562949958467584
+  }
+}

@@ -1,4 +1,4 @@
-package types;
+package types.lua;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -6,6 +6,7 @@ import java.util.Map;
 public class LuaRecipe {
 
     private String name;
+    private String category;
     private double time;
     private final Map<String, Integer> ingredients = new HashMap<>();
     private final Map<String, Integer> outputs = new HashMap<>();
@@ -17,7 +18,7 @@ public class LuaRecipe {
 
     @Override
     public String toString() {
-        return name + " (" + time + ")";
+        return name + " (" + getTime() + ")";
     }
 
     public String getName() {
@@ -28,7 +29,18 @@ public class LuaRecipe {
         this.name = name;
     }
 
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
     public double getTime() {
+        if(time == 0) {
+            return 0.5;
+        }
         return time;
     }
 
@@ -51,4 +63,5 @@ public class LuaRecipe {
     public void setProd(boolean prod) {
         this.prod = prod;
     }
+
 }

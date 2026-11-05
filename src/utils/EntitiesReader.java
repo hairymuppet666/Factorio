@@ -1,7 +1,6 @@
 package utils;
 
-import types.LuaEntity;
-import types.LuaRecipe;
+import types.lua.LuaEntity;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -12,7 +11,7 @@ import java.util.Map;
 
 public class EntitiesReader {
 
-    public static void readFile(String filename) {
+    public static List<LuaEntity> readFile(String filename) {
         Path filePath = Path.of(filename);
 
         List<LuaEntity> entities = new ArrayList<>();
@@ -73,7 +72,7 @@ public class EntitiesReader {
                     String number = line.split("=")[1];
                     number = number.trim();
                     number = number.trim();
-                    entity.setBeaconSupplyAreaDistance(Double.parseDouble(number));
+                    entity.setSupplyAreaDistance(Double.parseDouble(number));
                 }
                 if(line.startsWith("distribution_effectivity") && !line.contains("bonus")) {
                     String number = line.split("=")[1];
@@ -92,6 +91,12 @@ public class EntitiesReader {
                     number = number.trim();
                     number = number.trim();
                     entity.setModuleSlots(Integer.parseInt(number));
+                }
+                if(line.startsWith("maximum_wire_distance")) {
+                    String number = line.split("=")[1];
+                    number = number.trim();
+                    number = number.trim();
+                    entity.setElectricityWireDistance(Double.parseDouble(number));
                 }
                 if(line.startsWith("crafting_categories")) {
                     if(line.endsWith("}")) {
@@ -128,6 +133,8 @@ public class EntitiesReader {
             System.out.println("Line: " + lines.size() + ", Saving Entity " + entity);
 
             System.out.println(entities.size());
+
+            return entities;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

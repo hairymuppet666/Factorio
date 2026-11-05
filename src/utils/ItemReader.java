@@ -1,18 +1,16 @@
 package utils;
 
-import types.LuaItem;
-import types.LuaRecipe;
+import types.lua.LuaItem;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 public class ItemReader {
 
-    public static void readFile(String filename) {
+    public static List<LuaItem> readFile(String filename) {
         Path filePath = Path.of(filename);
 
         List<LuaItem> items = new ArrayList<>();
@@ -86,6 +84,8 @@ public class ItemReader {
             System.out.println("Line " + lines.size() + ": Saving Item " + item);
 
             System.out.println(items.size());
+
+            return items;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

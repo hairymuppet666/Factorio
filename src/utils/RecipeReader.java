@@ -1,6 +1,6 @@
 package utils;
 
-import types.LuaRecipe;
+import types.lua.LuaRecipe;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class RecipeReader {
 
-    public static void readFile(String filename) {
+    public static List<LuaRecipe> readFile(String filename) {
         Path filePath = Path.of(filename);
 
         List<LuaRecipe> recipes = new ArrayList<>();
@@ -42,13 +42,17 @@ public class RecipeReader {
                         if(recipe.getIngredients().isEmpty()) {
                             System.out.println("Could not parse any ingredients for " + recipe);
                         }
-//                        System.out.println("Saving Recipe " + recipe);
+                        System.out.println("Saving Recipe " + recipe);
                     }
                     recipe = new LuaRecipe();
                 }
                 if(line.startsWith("name")) {
                     String name = line.split("\"")[1];
                     recipe.setName(name);
+                }
+                if(line.startsWith("category")) {
+                    String category = line.split("\"")[1];
+                    recipe.setCategory(category);
                 }
                 if(line.startsWith("energy_required")) {
                     String number = line.split("=")[1];
@@ -145,6 +149,8 @@ public class RecipeReader {
             recipes.add(recipe);
 
             System.out.println(recipes.size());
+
+            return recipes;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
