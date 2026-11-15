@@ -16,7 +16,7 @@ public class FactoryProcess {
 
     private ProcessType processType;
 
-    private double outputPerSecond;
+    private Map<String, Double> outputsProvided = new HashMap<>();
 
     private Map<String, Double> inputsRequired = new HashMap<>();
 
@@ -30,7 +30,34 @@ public class FactoryProcess {
         }
 
         this.processType = processType;
-        this.outputPerSecond = outputPerSecond;
+        this.outputsProvided.put(product, outputPerSecond);
+
+        double outputAmount = recipe.getOutputs().get(product);
+
+        for(Map.Entry<String, Integer> entry : recipe.getIngredients().entrySet()) {
+            double inputAmount = entry.getValue() * outputPerSecond / outputAmount;
+            inputsRequired.put(entry.getKey(), inputAmount);
+        }
+
+    }
+
+    public FactoryProcess(String product, LuaRecipe recipe, ProcessType processType, double outputPerSecond) {
+        if(recipe.getCategory() == null) {
+            this.machine = LuaEntityManager.getAssemblyMachine();
+        } else if(recipe.getCategory().equals("smelting")) {
+            this.machine = LuaEntityManager.getEntity("electric-furnace");
+        }
+
+        this.processType = processType;
+        for(Map.Entry<String, Integer> entry : recipe.getOutputs().entrySet()) {
+            double ops = outputPerSecond;
+            if(!product.equals(entry.getKey())) {
+                int defaultOPS = recipe.getOutputs().get(product);
+                ops = outputPerSecond * (entry.getValue() * 1.0) / (defaultOPS * 1.0);
+            }
+
+            this.outputsProvided.put(entry.getKey(), ops);
+        }
 
         double outputAmount = recipe.getOutputs().get(product);
 
@@ -65,12 +92,8 @@ public class FactoryProcess {
         this.processType = processType;
     }
 
-    public double getOutputPerSecond() {
-        return outputPerSecond;
-    }
-
-    public void setOutputPerSecond(double outputPerSecond) {
-        this.outputPerSecond = outputPerSecond;
+    public Map<String, Double> getOutputsProvided() {
+        return outputsProvided;
     }
 
     public Map<String, Double> getInputsRequired() {
@@ -83,7 +106,7 @@ public class FactoryProcess {
                 "recipe=" + recipe +
                 ", machine=" + machine +
                 ", processType=" + processType +
-                ", outputPerSecond=" + outputPerSecond +
+                ", outputsProvided=" + outputsProvided +
                 ", inputsRequired=" + inputsRequired +
                 '}';
     }

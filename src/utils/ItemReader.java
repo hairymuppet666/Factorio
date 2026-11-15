@@ -49,6 +49,26 @@ public class ItemReader {
                     String name = line.split("\"")[1];
                     item.setName(name);
                 }
+                if(line.startsWith("fuel_category")) {
+                    String cat = line.split("\"")[1];
+                    cat = cat.trim();
+                    item.setFuelCategory(cat);
+                }
+                if(line.startsWith("fuel_value")) {
+                    String value = line.split("\"")[1];
+                    value = value.trim();
+                    double fuelVal = Double.parseDouble(value.substring(0, value.length()-2));
+                    if(value.endsWith("KJ")) {
+                        fuelVal /= 1000;
+                    }
+                    else if(value.endsWith("GJ")) {
+                        fuelVal *= 1000;
+                    }
+                    else if(value.endsWith("TJ")) {
+                        fuelVal *= 1000000;
+                    }
+                    item.setFuelValue(fuelVal);
+                }
                 if(line.startsWith("effect")) {
                     if(line.contains("speed")) {
                         parseLine(line, item);

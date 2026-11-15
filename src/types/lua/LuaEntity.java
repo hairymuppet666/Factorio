@@ -6,6 +6,7 @@ import java.util.List;
 public class LuaEntity {
 
     private String name;
+    private String type;
     private final List<String> craftingCategories = new ArrayList<>();
     private double speed;
     private int moduleSlots;
@@ -21,6 +22,9 @@ public class LuaEntity {
     private double beaconDistributionEffectivity;
 
     private double electricityWireDistance;
+
+    private double energyConsumptionMW;
+    private double targetTemperature;
 
     public String getName() {
         return name;
@@ -111,4 +115,27 @@ public class LuaEntity {
         this.electricityWireDistance = electricityWireDistance;
     }
 
+    public double getEnergyConsumptionMW() {
+        return energyConsumptionMW;
+    }
+
+    public void setEnergyConsumptionMW(double energyConsumptionMW) {
+        this.energyConsumptionMW = energyConsumptionMW;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public double getTargetTemperature() {
+        return targetTemperature;
+    }
+
+    public void setTargetTemperature(double targetTemperature) {
+        this.targetTemperature = targetTemperature;
+    }
 }

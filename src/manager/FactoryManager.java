@@ -16,7 +16,7 @@ public class FactoryManager {
     public static Factory buildFactory(String product, double perSecond) {
         Factory factory = new Factory();
 
-        List<FactoryProcess> processes = ProcessManager.calculateProcesses(product, ProcessType.LOGISTIC, perSecond);
+        List<FactoryProcess> processes = SimpleProcessManager.calculateProcesses(product, ProcessType.LOGISTIC, perSecond);
 
 
         int i = 0;
@@ -24,7 +24,7 @@ public class FactoryManager {
         for(FactoryProcess process : processes) {
             System.out.println(process);
 
-            double machinesRequiredDouble = process.getOutputPerSecond() * process.getRecipe().getTime() / process.getMachine().getSpeed();
+            double machinesRequiredDouble = process.getOutputsProvided().get(product) * process.getRecipe().getTime() / process.getMachine().getSpeed();
 
             int machinesRequired = (int) Math.ceil(machinesRequiredDouble);
             System.out.println(machinesRequired);

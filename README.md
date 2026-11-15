@@ -16,3 +16,9 @@ direct machine-to-machine
 belts
 
 trains
+
+take into account non-chemical fuel sources for entities
+
+read proper water values from fluid.lua file
+
+take into account void recipes

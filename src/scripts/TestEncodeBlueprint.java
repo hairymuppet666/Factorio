@@ -1,9 +1,12 @@
 package scripts;
 
 import blueprint.BlueprintEncoder;
+import manager.AdvancedProcessManager;
+import manager.FluidManager;
 import manager.LuaEntityManager;
 import types.entities.*;
 import types.enums.Direction;
+import types.enums.ProcessType;
 import types.lua.LuaEntity;
 
 import java.io.IOException;
@@ -36,6 +39,11 @@ public class TestEncodeBlueprint {
         }
 
         String blueprint = BlueprintEncoder.createBlueprint(factory);
+
+        FluidManager.determineSteamOutputPerSecond(LuaEntityManager.getEntity("heat-exchanger"));
+
+        AdvancedProcessManager.calculateProcesses("logistic-science-pack", ProcessType.LOGISTIC, 1);
+        AdvancedProcessManager.calculateProcesses("chemical-science-pack", ProcessType.LOGISTIC, 1);
 
         System.out.println(blueprint);
     }

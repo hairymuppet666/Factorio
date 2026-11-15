@@ -1,14 +1,13 @@
 package manager;
 
 import types.enums.ProcessType;
-import types.lua.LuaRecipe;
 import types.processes.FactoryProcess;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class ProcessManager {
+public class SimpleProcessManager {
 
     public static List<FactoryProcess> calculateProcesses(String product, ProcessType type, double perSecond) {
 

@@ -8,6 +8,9 @@ public class LuaItem {
     private double prodEffect;
     private double speedEffect;
 
+    private String fuelCategory;
+    private double fuelValueMJ;
+
     @Override
     public String toString() {
         return name + "(" + prodEffect + ", " + speedEffect + ")";
@@ -43,5 +46,21 @@ public class LuaItem {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getFuelCategory() {
+        return fuelCategory;
+    }
+
+    public void setFuelCategory(String fuelCategory) {
+        this.fuelCategory = fuelCategory;
+    }
+
+    public double getFuelValueMJ() {
+        return fuelValueMJ;
+    }
+
+    public void setFuelValue(double fuelValueMJ) {
+        this.fuelValueMJ = fuelValueMJ;
     }
 }

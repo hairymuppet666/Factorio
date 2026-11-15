@@ -17,6 +17,8 @@ public class EntitiesReader {
         List<LuaEntity> entities = new ArrayList<>();
         LuaEntity entity = new LuaEntity();
 
+        boolean typeFound = false;
+
         try {
             List<String> lines = Files.readAllLines(filePath);
 
@@ -45,6 +47,7 @@ public class EntitiesReader {
                             entities.add(entity);
                             System.out.println("Line: " + i + ", Saving Entity " + entity);
                             entity = new LuaEntity();
+                            typeFound = false;
                         }
                     }
                     else if(line.substring(j, j+1).equals("}")) {
@@ -55,6 +58,17 @@ public class EntitiesReader {
                 if(line.startsWith("name") && !line.contains("arguments.name") && entity.getName() == null) {
                     String name = line.split("\"")[1];
                     entity.setName(name);
+                }
+                if(line.startsWith("type") && !typeFound) {
+                    String type = line.split("\"")[1];
+                    entity.setType(type);
+                    typeFound = true;
+                }
+                if(line.startsWith("target_temperature")) {
+                    String number = line.split("=")[1];
+                    number = number.trim();
+                    number = number.trim();
+                    entity.setTargetTemperature(Double.parseDouble(number));
                 }
                 if(line.startsWith("extension_speed")) {
                     String number = line.split("=")[1];
@@ -97,6 +111,21 @@ public class EntitiesReader {
                     number = number.trim();
                     number = number.trim();
                     entity.setElectricityWireDistance(Double.parseDouble(number));
+                }
+                if(line.startsWith("energy_consumption")) {
+                    String value = line.split("\"")[1];
+                    value = value.trim();
+                    double energyVal = Double.parseDouble(value.substring(0, value.length()-2));
+                    if(value.endsWith("KW")) {
+                        energyVal /= 1000;
+                    }
+                    else if(value.endsWith("GW")) {
+                        energyVal *= 1000;
+                    }
+                    else if(value.endsWith("TW")) {
+                        energyVal *= 1000000;
+                    }
+                    entity.setEnergyConsumptionMW(energyVal);
                 }
                 if(line.startsWith("crafting_categories")) {
                     if(line.endsWith("}")) {
